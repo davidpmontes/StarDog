@@ -5044,7 +5044,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraPositionTarget: {fileID: 649421460}
   followDistance: 0.569
-  smoothTime: 0.298
 --- !u!4 &265070322 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5323031283941618066, guid: 02911fd5bfcf74fe29562843d7ce94c4,
@@ -6078,7 +6077,8 @@ MonoBehaviour:
   maxAimingVerticalDisplacement: 10
   maxMovingHorizontalDisplacement: 10
   maxMovingVerticalDisplacement: 5
-  cameraLerpPercent: 0.08
+  cameraLerpPercent: 0.048
+  flySpeed: 5
 --- !u!4 &323159908
 Transform:
   m_ObjectHideFlags: 0
@@ -18799,7 +18799,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraPositionTarget: {fileID: 649421460}
   followDistance: 0
-  smoothTime: 1
 --- !u!20 &1024164800
 Camera:
   m_ObjectHideFlags: 0

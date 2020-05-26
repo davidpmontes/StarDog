@@ -16,12 +16,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxAimingVerticalDisplacement = default;
     [SerializeField] private float maxMovingHorizontalDisplacement = default;
     [SerializeField] private float maxMovingVerticalDisplacement = default;
-    [SerializeField] private float cameraLerpPercent = default;
+    [SerializeField]
+    [Range(0, 1.0f)]
+    private float cameraLerpPercent = default;
 
-    //[SerializeField] private float flySpeed = default;
+    private float minFlySpeed = 0f;
+    private float maxFlySpeed = 10f;
+    [SerializeField] private float flySpeed = 5f;
 
     private float horizontalRaw;
     private float verticalRaw;
+    private float leftTriggerRaw;
+    private float rightTriggerRaw;
 
     private void Awake()
     {
@@ -47,11 +53,18 @@ public class PlayerController : MonoBehaviour
     {
         horizontalRaw = Gamepad.current.leftStick.x.ReadValue();
         verticalRaw = Gamepad.current.leftStick.y.ReadValue();
+
+        // 0 => up, 1 => held down
+        leftTriggerRaw = Gamepad.current.leftTrigger.ReadValue();
+        rightTriggerRaw = Gamepad.current.rightTrigger.ReadValue();
     }
 
     private void MoveFrame()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * 5);
+        flySpeed = Mathf.MoveTowards(flySpeed, maxFlySpeed, Time.deltaTime * rightTriggerRaw * 3);
+        flySpeed = Mathf.MoveTowards(flySpeed, minFlySpeed, Time.deltaTime * leftTriggerRaw * 3);
+
+        transform.Translate(Vector3.forward * Time.deltaTime * flySpeed);
     }
 
     private void UpdateTargetCursorObj()
