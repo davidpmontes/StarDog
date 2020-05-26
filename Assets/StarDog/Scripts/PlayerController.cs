@@ -31,6 +31,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         GetInput();
+    }
+
+    void FixedUpdate()
+    {
         MoveFrame();
         UpdateTargetCursorObj();
         UpdateTargetPlaneObj();
@@ -88,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
         modelContainer.transform.position = Vector3.MoveTowards(modelContainer.transform.position,
                                                                 targetPlaneObj.transform.position,
-                                                                distance * Time.deltaTime);
+                                                                1.2f * distance * Time.deltaTime);
     }
 
     private void UpdatePitchRollYaw()

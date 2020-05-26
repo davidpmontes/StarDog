@@ -4429,8 +4429,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229584193}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -5024,7 +5024,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 264842524}
   m_LocalRotation: {x: -0, y: -1e-45, z: -5.6636893e-11, w: -1}
-  m_LocalPosition: {x: 0, y: 5, z: -81}
+  m_LocalPosition: {x: -0, y: 0, z: -75.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5043,6 +5043,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPositionTarget: {fileID: 649421460}
+  followDistance: 0.569
+  smoothTime: 0.298
 --- !u!4 &265070322 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5323031283941618066, guid: 02911fd5bfcf74fe29562843d7ce94c4,
@@ -6072,10 +6074,10 @@ MonoBehaviour:
   cameraPositionTarget: {fileID: 649421460}
   pitch: {fileID: 302387365}
   yaw: {fileID: 1266706318}
-  maxAimingHorizontalDisplacement: 10
-  maxAimingVerticalDisplacement: 7
-  maxMovingHorizontalDisplacement: 5
-  maxMovingVerticalDisplacement: 3
+  maxAimingHorizontalDisplacement: 17
+  maxAimingVerticalDisplacement: 10
+  maxMovingHorizontalDisplacement: 10
+  maxMovingVerticalDisplacement: 5
   cameraLerpPercent: 0.08
 --- !u!4 &323159908
 Transform:
@@ -12091,7 +12093,7 @@ Transform:
   m_GameObject: {fileID: 649421460}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.7}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1644686650}
   m_RootOrder: 1
@@ -14786,7 +14788,7 @@ PrefabInstance:
     - target: {fileID: 1200485282192234335, guid: 26037db3d62c04481a7030077c30a67c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26037db3d62c04481a7030077c30a67c, type: 3}
@@ -18796,6 +18798,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPositionTarget: {fileID: 649421460}
+  followDistance: 0
+  smoothTime: 1
 --- !u!20 &1024164800
 Camera:
   m_ObjectHideFlags: 0
@@ -29955,8 +29959,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1556035673}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
