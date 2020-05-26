@@ -12,8 +12,10 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private GameObject roll = default;
     [SerializeField] private GameObject yaw = default;
 
-    [SerializeField] private float maxHorizontalDisplacement = default;
-    [SerializeField] private float maxVerticalDisplacement = default;
+    [SerializeField] private float maxAimingHorizontalDisplacement = default;
+    [SerializeField] private float maxAimingVerticalDisplacement = default;
+    [SerializeField] private float maxMovingHorizontalDisplacement = default;
+    [SerializeField] private float maxMovingVerticalDisplacement = default;
     [SerializeField] private float cameraLerpPercent = default;
 
     //[SerializeField] private float flySpeed = default;
@@ -61,19 +63,23 @@ public class PlayerController : MonoBehaviour
         temp.y += -verticalRaw * Time.deltaTime * 15;
         temp.z = 10;
 
-        temp.x = Mathf.Clamp(temp.x, -maxHorizontalDisplacement + leftPadding,
-                                     maxHorizontalDisplacement - rightPadding);
-        temp.y = Mathf.Clamp(temp.y, -maxVerticalDisplacement + bottomPadding,
-                                     maxVerticalDisplacement - topPadding);
+        temp.x = Mathf.Clamp(temp.x, -maxAimingHorizontalDisplacement + leftPadding,
+                                     maxAimingHorizontalDisplacement - rightPadding);
+        temp.y = Mathf.Clamp(temp.y, -maxAimingVerticalDisplacement + bottomPadding,
+                                     maxAimingVerticalDisplacement - topPadding);
 
         targetCursorObj.transform.localPosition = temp;
     }
 
     private void UpdateTargetPlaneObj()
     {
-        targetPlaneObj.transform.position = new Vector3(targetCursorObj.transform.position.x,
-                                                        targetCursorObj.transform.position.y,
-                                                        transform.position.z);
+        var planeTarget = new Vector3(targetCursorObj.transform.localPosition.x,
+                                                             targetCursorObj.transform.localPosition.y,
+                                                             targetPlaneObj.transform.localPosition.z);
+        planeTarget.x = Mathf.Clamp(planeTarget.x, -maxMovingHorizontalDisplacement, maxMovingHorizontalDisplacement);
+        planeTarget.y = Mathf.Clamp(planeTarget.y, -maxMovingVerticalDisplacement, maxMovingVerticalDisplacement);
+
+        targetPlaneObj.transform.localPosition = planeTarget;
     }
 
     private void MovePlane()
@@ -110,6 +116,9 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector2(2 * maxHorizontalDisplacement, 2 * maxVerticalDisplacement));
+        Gizmos.DrawWireCube(transform.position, new Vector2(2 * maxAimingHorizontalDisplacement, 2 * maxAimingVerticalDisplacement));
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position, new Vector2(2 * maxMovingHorizontalDisplacement, 2 * maxMovingVerticalDisplacement));
     }
 }

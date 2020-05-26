@@ -6,7 +6,6 @@ public class MissileLauncher : MonoBehaviour
     [SerializeField] private Transform leftBarrel = default;
     [SerializeField] private Transform rightBarrel = default;
 
-    private bool canFire;
     private bool isLeftFiring;
     private Vector3 lastPosition;
     private Vector3 currVelocity;
@@ -26,15 +25,8 @@ public class MissileLauncher : MonoBehaviour
     {
         if (Gamepad.current.buttonEast.wasPressedThisFrame)
         {
-            if (!canFire)
-                return;
-
-            canFire = false;
             Fire();
         }
-
-        if (Gamepad.current.buttonEast.wasReleasedThisFrame)
-            canFire = true;
     }
 
     private void UpdateVelocity()
