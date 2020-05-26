@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private float lifespan = default;
+    [SerializeField] private Pools impactEffect;
+
     private Rigidbody rb;
 
     private void Awake()
@@ -26,11 +29,11 @@ public class Bullet : MonoBehaviour
         {
             enemyDamage.Damage();
         }
-        //other.GetComponent<EnemyDamage>().Damage();
+
         rb.velocity = Vector3.zero;
         rb.rotation = Quaternion.identity;
         StopAllCoroutines();
-        var sparks = ObjectPool.Instance.GetFromPoolInactive(Pools.SparksYellow);
+        var sparks = ObjectPool.Instance.GetFromPoolInactive(impactEffect);
         sparks.SetActive(true);
         sparks.GetComponent<Sparks>().Initialize(transform.position, Quaternion.identity);
         ObjectPool.Instance.DeactivateAndAddToPool(gameObject);
@@ -38,7 +41,7 @@ public class Bullet : MonoBehaviour
 
     IEnumerator KillBulletAfterTime()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(lifespan);
         ObjectPool.Instance.DeactivateAndAddToPool(gameObject);
     }
 }

@@ -5,7 +5,9 @@ using UnityEngine;
 public enum Pools
 {
     BulletYellow,
-    SparksYellow
+    RocketOrange,
+    SparksYellow,
+    eff_bomb_small_01
 };
 
 public class ObjectPool : MonoBehaviour

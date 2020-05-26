@@ -1738,6 +1738,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02911fd5bfcf74fe29562843d7ce94c4, type: 3}
+--- !u!1 &108970763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 108970764}
+  m_Layer: 11
+  m_Name: LeftBarrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &108970764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108970763}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0562, y: 0.028999805, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1239534417}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &109722137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5059,7 +5089,7 @@ GameObject:
   m_Component:
   - component: {fileID: 267626529}
   m_Layer: 11
-  m_Name: RighBarrel
+  m_Name: RightBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6611,6 +6641,7 @@ Transform:
   m_Children:
   - {fileID: 438102216}
   - {fileID: 632209830}
+  - {fileID: 1239534417}
   m_Father: {fileID: 302387366}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18629,6 +18660,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1043710820}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1043746718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1043746719}
+  m_Layer: 11
+  m_Name: RightBarrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1043746719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043746718}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0562, y: 0.028999805, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1239534417}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1044318213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23193,6 +23254,53 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1236399669}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1239534416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1239534417}
+  - component: {fileID: 1239534418}
+  m_Layer: 11
+  m_Name: MissileLauncher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1239534417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239534416}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 108970764}
+  - {fileID: 1043746719}
+  m_Father: {fileID: 381979804}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1239534418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239534416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 607b36efb0c284c8da3c3c885a1dfe10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftBarrel: {fileID: 108970764}
+  rightBarrel: {fileID: 1043746719}
 --- !u!1001 &1243881618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36342,7 +36450,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 2325310410512876168, guid: 9c51baa4423cd4dd8a1e466311a52fb2, type: 3}
+  - {fileID: 9068181907546657056, guid: e60edc0128f734b38970b3ee56745e01, type: 3}
   - {fileID: 4467675416438164165, guid: 1e2bc77d5e1554efb8719bbde3730899, type: 3}
+  - {fileID: 830298856411366783, guid: 733a313db176f46a8ab59b595d7dfd8f, type: 3}
 --- !u!4 &1934831850
 Transform:
   m_ObjectHideFlags: 0

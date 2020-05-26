@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Sparks : MonoBehaviour
 {
+    [SerializeField] private float lifespan = default;
+
     public void Initialize(Vector3 position,
                            Quaternion rotation)
     {
@@ -13,7 +15,7 @@ public class Sparks : MonoBehaviour
 
     IEnumerator KillSparksAfterTime()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(lifespan);
         ObjectPool.Instance.DeactivateAndAddToPool(gameObject);
     }
 }
