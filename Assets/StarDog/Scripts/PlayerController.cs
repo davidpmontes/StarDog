@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject modelContainer = default;
     [SerializeField] private GameObject cameraPositionTarget = default;
     [SerializeField] private GameObject pitch = default;
-    //[SerializeField] private GameObject roll = default;
+    [SerializeField] private GameObject roll = default;
     [SerializeField] private GameObject yaw = default;
 
     [SerializeField] private float maxAimingHorizontalDisplacement = default;
@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     private float leftTriggerRaw;
     private float rightTriggerRaw;
 
+    private float yawValue;
+    private float pitchValue;
+    private float rollValue;
+
     private void Awake()
     {
         targetPlaneObj.transform.localPosition = Vector3.zero;
@@ -42,10 +46,11 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         MoveFrame();
-        UpdateTargetCursorObj();
+        UpdateYawPitchRollValues();
+        //UpdateTargetCursorObj();
         UpdateTargetPlaneObj();
         MovePlane();
-        UpdatePitchRollYaw();
+        UpdateYawPitchRoll();
         UpdateCameraPositionTarget();
     }
 
@@ -67,62 +72,89 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * flySpeed);
     }
 
-    private void UpdateTargetCursorObj()
+    private void UpdateYawPitchRollValues()
     {
-        var topPadding = 0f;
-        var bottomPadding = 0f;
-        var leftPadding = 0f;
-        var rightPadding = 0f;
-
-        Vector3 temp = targetCursorObj.transform.localPosition;
-
-        temp.x += horizontalRaw * Time.deltaTime * 15;
-        temp.y += -verticalRaw * Time.deltaTime * 15;
-        temp.z = 10;
-
-        temp.x = Mathf.Clamp(temp.x, -maxAimingHorizontalDisplacement + leftPadding,
-                                     maxAimingHorizontalDisplacement - rightPadding);
-        temp.y = Mathf.Clamp(temp.y, -maxAimingVerticalDisplacement + bottomPadding,
-                                     maxAimingVerticalDisplacement - topPadding);
-
-        targetCursorObj.transform.localPosition = temp;
+        yawValue = Mathf.MoveTowards(yawValue, horizontalRaw, 10 * Mathf.Abs(yawValue - horizontalRaw) * Time.deltaTime); ;
+        pitchValue = Mathf.MoveTowards(pitchValue, verticalRaw, 10 * Mathf.Abs(pitchValue - verticalRaw) * Time.deltaTime);
+        rollValue = Mathf.MoveTowards(rollValue, horizontalRaw, 10 * Mathf.Abs(rollValue - horizontalRaw) * Time.deltaTime); //-horizontalRaw;
     }
+
+    //private void UpdateTargetCursorObj()
+    //{
+    //    Vector3 temp = targetCursorObj.transform.localPosition;
+
+    //    temp.x += horizontalRaw * Time.deltaTime * 15;
+    //    temp.y += -verticalRaw * Time.deltaTime * 15;
+    //    temp.z = 10;
+
+    //    temp.x = Mathf.Clamp(temp.x, -maxAimingHorizontalDisplacement,
+    //                                 maxAimingHorizontalDisplacement);
+    //    temp.y = Mathf.Clamp(temp.y, -maxAimingVerticalDisplacement,
+    //                                 maxAimingVerticalDisplacement);
+    //    if (temp.y > maxMovingVerticalDisplacement)
+    //        temp.y = Mathf.MoveTowards(temp.y, maxMovingVerticalDisplacement, (temp.y - maxMovingVerticalDisplacement) * Time.deltaTime);
+
+    //    if (temp.y < -maxMovingVerticalDisplacement)
+    //        temp.y = Mathf.MoveTowards(temp.y, -maxMovingVerticalDisplacement, (-maxMovingVerticalDisplacement - temp.y) * Time.deltaTime);
+
+    //    if (temp.x > maxMovingHorizontalDisplacement)
+    //        temp.x = Mathf.MoveTowards(temp.x, maxMovingHorizontalDisplacement, (temp.x - maxMovingHorizontalDisplacement) * Time.deltaTime);
+
+    //    if (temp.x < -maxMovingHorizontalDisplacement)
+    //        temp.x = Mathf.MoveTowards(temp.x, -maxMovingHorizontalDisplacement, (-maxMovingHorizontalDisplacement - temp.x) * Time.deltaTime);
+
+    //    targetCursorObj.transform.localPosition = temp;
+    //}
 
     private void UpdateTargetPlaneObj()
     {
-        var planeTarget = new Vector3(targetCursorObj.transform.localPosition.x,
-                                                             targetCursorObj.transform.localPosition.y,
-                                                             targetPlaneObj.transform.localPosition.z);
-        planeTarget.x = Mathf.Clamp(planeTarget.x, -maxMovingHorizontalDisplacement, maxMovingHorizontalDisplacement);
-        planeTarget.y = Mathf.Clamp(planeTarget.y, -maxMovingVerticalDisplacement, maxMovingVerticalDisplacement);
+        //var planeTarget = new Vector3(targetCursorObj.transform.localPosition.x,
+        //                                                     targetCursorObj.transform.localPosition.y,
+        //                                                     targetPlaneObj.transform.localPosition.z);
+        //planeTarget.x = Mathf.Clamp(planeTarget.x, -maxMovingHorizontalDisplacement, maxMovingHorizontalDisplacement);
+        //planeTarget.y = Mathf.Clamp(planeTarget.y, -maxMovingVerticalDisplacement, maxMovingVerticalDisplacement);
 
-        targetPlaneObj.transform.localPosition = planeTarget;
+
+
+        //targetPlaneObj.transform.localPosition = planeTarget;
     }
 
     private void MovePlane()
     {
-        var distance = Vector3.Distance(modelContainer.transform.position, targetPlaneObj.transform.position);
+        //var distance = Vector3.Distance(modelContainer.transform.position, targetPlaneObj.transform.position);
 
-        modelContainer.transform.position = Vector3.MoveTowards(modelContainer.transform.position,
-                                                                targetPlaneObj.transform.position,
-                                                                1.2f * distance * Time.deltaTime);
+        //modelContainer.transform.position = Vector3.MoveTowards(modelContainer.transform.position,
+        //                                                        targetPlaneObj.transform.position,
+        //                                                        1.2f * distance * Time.deltaTime);
+
+        //modelContainer.transform.position = targetPlaneObj.transform.position;
+
+        var targetPosition = modelContainer.transform.position += new Vector3(horizontalRaw * 0.1f, -verticalRaw * 0.1f, 0);
+        targetPosition.x = Mathf.Clamp(targetPosition.x, -maxMovingHorizontalDisplacement, maxMovingHorizontalDisplacement);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, 0, 2 * maxMovingVerticalDisplacement);
+
+        modelContainer.transform.position = targetPosition;
     }
 
-    private void UpdatePitchRollYaw()
+    private void UpdateYawPitchRoll()
     {
         //Pitch
-        var direction = (new Vector3(pitch.transform.position.x,
-                                     targetCursorObj.transform.position.y,
-                                     targetCursorObj.transform.position.z) - pitch.transform.position).normalized;
-        var lookRotation = Quaternion.LookRotation(direction);
-        pitch.transform.localRotation = lookRotation;
+        //var direction = (new Vector3(pitch.transform.position.x,
+        //                             targetCursorObj.transform.position.y,
+        //                             targetCursorObj.transform.position.z) - pitch.transform.position).normalized;
+        //var lookRotation = Quaternion.LookRotation(direction);
+        //pitch.transform.localRotation = lookRotation;
 
         //Yaw
-        direction = (new Vector3(targetCursorObj.transform.position.x,
-                                 pitch.transform.position.y,
-                                 targetCursorObj.transform.position.z) - yaw.transform.position).normalized;
-        lookRotation = Quaternion.LookRotation(direction);
-        yaw.transform.localRotation = lookRotation;
+        //direction = (new Vector3(targetCursorObj.transform.position.x,
+        //                         pitch.transform.position.y,
+        //                         targetCursorObj.transform.position.z) - yaw.transform.position).normalized;
+        //lookRotation = Quaternion.LookRotation(direction);
+        //yaw.transform.localRotation = lookRotation;
+
+        yaw.transform.localRotation = Quaternion.Euler(0, yawValue * 20, 0);
+        pitch.transform.localRotation = Quaternion.Euler(pitchValue * 20, 0, 0);
+        roll.transform.localRotation = Quaternion.Euler(0, 0, -rollValue * 20);
     }
 
     private void UpdateCameraPositionTarget()
