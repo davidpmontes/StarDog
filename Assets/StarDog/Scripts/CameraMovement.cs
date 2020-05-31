@@ -3,17 +3,17 @@
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private GameObject cameraPositionTarget = default;
-    [SerializeField]
-    [Range(0, 2)]
-    private float followDistance;
-
-    void LateUpdate()
+    
+    void FixedUpdate()
     {
         Move();    
     }
 
     private void Move()
     {
-        transform.position = cameraPositionTarget.transform.position + new Vector3(0, 0, -followDistance);
+        transform.position = cameraPositionTarget.transform.position;
+
+        var targetRotation = cameraPositionTarget.transform.rotation;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 0.05f * Quaternion.Angle(transform.rotation, targetRotation));
     }
 }

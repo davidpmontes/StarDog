@@ -1,0 +1,41 @@
+[33mcommit 0ac015091ae975e496b9191a62463f916eeb3ff3[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: David Montes <david.montes@sjsu.edu>
+Date:   Wed May 27 23:48:00 2020 -0700
+
+    snappier controls
+
+[33mcommit 12cf8f6e24627b9d4c071e8eba550834c3db77ca[m
+Author: David Montes <david.montes@sjsu.edu>
+Date:   Tue May 26 00:43:34 2020 -0700
+
+    added trigger flight speed up and down
+
+[33mcommit 53acc29097e49a58828b387407e7207aaa32b2b5[m
+Author: David Montes <david.montes@sjsu.edu>
+Date:   Tue May 26 00:32:02 2020 -0700
+
+    smoothed camera follow
+
+[33mcommit 38a3027e1842145028b43ade10a89c606cd91c73[m
+Author: David Montes <david.montes@sjsu.edu>
+Date:   Mon May 25 23:50:49 2020 -0700
+
+    new flying style
+
+[33mcommit 3817ccccbcfcf7cf95f49b1746de7c7ad0bcc8d0[m
+Author: David Montes <david.montes@sjsu.edu>
+Date:   Mon May 25 17:24:23 2020 -0700
+
+    added missiles with explosions on impact
+
+[33mcommit 4e9dc429ed23b5541c3d009e174fc405d4f2022d[m
+Author: David Montes <david.montes@sjsu.edu>
+Date:   Mon May 25 15:45:00 2020 -0700
+
+    added rockets missiles and bombs pack
+
+[33mcommit c4bdf3b583203dfa0f69e4bffb646002b0df369d[m
+Author: David Montes <david.montes@sjsu.edu>
+Date:   Mon May 25 14:54:04 2020 -0700
+
+    init
