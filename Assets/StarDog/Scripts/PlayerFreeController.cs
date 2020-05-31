@@ -92,7 +92,7 @@ public class PlayerFreeController : MonoBehaviour
 
     private void MovePlane()
     {
-        cc.Move(pitch.transform.forward * flySpeed * Time.deltaTime);        
+        cc.Move(roll.transform.forward * flySpeed * Time.deltaTime);        
     }
 
     public void OnControllerColliderHit(ControllerColliderHit hit)
