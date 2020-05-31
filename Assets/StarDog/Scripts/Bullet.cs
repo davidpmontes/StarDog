@@ -4,7 +4,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float lifespan = default;
-    [SerializeField] private Pools impactEffect;
+    [SerializeField] private Pools impactEffect = default;
+    [SerializeField] private float projectileVelocity = default;
 
     private Rigidbody rb;
 
@@ -14,12 +15,13 @@ public class Bullet : MonoBehaviour
     }
 
     public void Initialize(Vector3 position,
-                           Vector3 velocity,
+                           Vector3 direction,
+                           float velocityOrigin,
                            Quaternion rotation)
     {
         transform.position = position;
         transform.rotation = rotation;
-        rb.velocity = velocity;
+        rb.velocity = direction * (velocityOrigin + projectileVelocity);
         StartCoroutine(KillBulletAfterTime());
     }
 
@@ -42,6 +44,8 @@ public class Bullet : MonoBehaviour
     IEnumerator KillBulletAfterTime()
     {
         yield return new WaitForSeconds(lifespan);
+        rb.velocity = Vector3.zero;
+        rb.rotation = Quaternion.identity;
         ObjectPool.Instance.DeactivateAndAddToPool(gameObject);
     }
 }

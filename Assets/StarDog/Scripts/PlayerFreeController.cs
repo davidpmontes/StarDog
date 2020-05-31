@@ -41,6 +41,11 @@ public class PlayerFreeController : MonoBehaviour
         MovePlane();
     }
 
+    public Vector3 GetCCVelocity()
+    {
+        return cc.velocity;
+    }
+
     private void GetInput()
     {
         horizontalRaw = Gamepad.current.leftStick.x.ReadValue();
@@ -73,7 +78,6 @@ public class PlayerFreeController : MonoBehaviour
         flySpeed = Mathf.MoveTowards(flySpeed, maxFlySpeed, Time.deltaTime * rightTriggerRaw * 10);
         flySpeed = Mathf.MoveTowards(flySpeed, minFlySpeed, Time.deltaTime * leftTriggerRaw * 10);
 
-        //transform.Translate(pitchRoll.transform.forward * flySpeed * Time.deltaTime);
         cc.Move(pitchRoll.transform.forward * flySpeed * Time.deltaTime);
     }
 

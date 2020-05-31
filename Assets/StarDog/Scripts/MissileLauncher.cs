@@ -5,6 +5,7 @@ public class MissileLauncher : MonoBehaviour
 {
     [SerializeField] private Transform leftBarrel = default;
     [SerializeField] private Transform rightBarrel = default;
+    [SerializeField] private PlayerFreeController playerFreeController = default;
 
     private bool isLeftFiring;
     private Vector3 lastPosition;
@@ -50,7 +51,8 @@ public class MissileLauncher : MonoBehaviour
         var projectile = ObjectPool.Instance.GetFromPoolInactive(Pools.RocketOrange);
         projectile.SetActive(true);
         projectile.GetComponent<Bullet>().Initialize(leftBarrel.position,
-                                                     currVelocity + leftBarrel.forward * 25,
+                                                     transform.forward,
+                                                     playerFreeController.GetCCVelocity().magnitude,
                                                      leftBarrel.rotation);
     }
 
@@ -59,7 +61,8 @@ public class MissileLauncher : MonoBehaviour
         var projectile = ObjectPool.Instance.GetFromPoolInactive(Pools.RocketOrange);
         projectile.SetActive(true);
         projectile.GetComponent<Bullet>().Initialize(rightBarrel.position,
-                                                     currVelocity + rightBarrel.forward * 25,
+                                                     transform.forward,
+                                                     playerFreeController.GetCCVelocity().magnitude,
                                                      rightBarrel.rotation);
     }
 }

@@ -6,20 +6,14 @@ public class DualCannons : MonoBehaviour
 {
     [SerializeField] private Transform leftBarrel = default;
     [SerializeField] private Transform rightBarrel = default;
+    [SerializeField] private PlayerFreeController playerFreeController = default;
 
+    //private bool isFiring;
     private bool isLeftFiring;
-    private Vector3 lastPosition;
-    private Vector3 currVelocity;
-
-    private void Awake()
-    {
-        lastPosition = transform.position;
-    }
 
     private void Update()
     {
         GetInput();
-        UpdateVelocity();
     }
 
     private void GetInput()
@@ -33,19 +27,18 @@ public class DualCannons : MonoBehaviour
             StopFiring();
     }
 
-    private void UpdateVelocity()
-    {
-        currVelocity = transform.position - lastPosition;
-        lastPosition = transform.position;
-    }
-
     public void StartFiring()
     {
+        //if (isFiring)
+        //    return;
+
+        //isFiring = true;
         StartCoroutine(FireBothCannons());
     }
 
     public void StopFiring()
     {
+        //isFiring = false;
         StopAllCoroutines();
     }
 
@@ -59,7 +52,7 @@ public class DualCannons : MonoBehaviour
                 FireCannonRight();
 
             isLeftFiring = !isLeftFiring;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.25f);
         }
     }
 
@@ -68,7 +61,8 @@ public class DualCannons : MonoBehaviour
         var bullet = ObjectPool.Instance.GetFromPoolInactive(Pools.BulletYellow);
         bullet.SetActive(true);
         bullet.GetComponent<Bullet>().Initialize(leftBarrel.position,
-                                                 currVelocity + leftBarrel.forward * 25,
+                                                 transform.forward,
+                                                 playerFreeController.GetCCVelocity().magnitude,
                                                  leftBarrel.rotation);
     }
 
@@ -77,7 +71,8 @@ public class DualCannons : MonoBehaviour
         var bullet = ObjectPool.Instance.GetFromPoolInactive(Pools.BulletYellow);
         bullet.SetActive(true);
         bullet.GetComponent<Bullet>().Initialize(rightBarrel.position,
-                                                 currVelocity + rightBarrel.forward * 25,
+                                                 transform.forward,
+                                                 playerFreeController.GetCCVelocity().magnitude,
                                                  rightBarrel.rotation);
     }
 }
