@@ -2,9 +2,17 @@
 
 public class CameraMovement : MonoBehaviour
 {
+    public static CameraMovement Instance { get; private set; }
     [SerializeField] private GameObject cameraPositionTarget = default;
     private float radius;
-    
+    private float minRadius = 0.27f;
+    private float maxRadius = 0.6f;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void FixedUpdate()
     {
         Move();    
@@ -18,9 +26,12 @@ public class CameraMovement : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 0.05f * Quaternion.Angle(transform.rotation, targetRotation));
     }
 
-    public void SetRadius(float newRadius)
+    public void UpdateRadius(float speedPercent)
     {
-
+        radius = minRadius + speedPercent * (maxRadius - minRadius);
+        var position = Camera.main.transform.localPosition;
+        position.z = -radius;
+        Camera.main.transform.localPosition = position;
     }
 
     public void LeftView()

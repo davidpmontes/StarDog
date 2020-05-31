@@ -5,11 +5,12 @@ public class PlayerFreeController : MonoBehaviour
 {
     [SerializeField] private GameObject modelContainer = default;
     [SerializeField] private GameObject yaw = default;
-    [SerializeField] private GameObject pitchRoll = default;
+    [SerializeField] private GameObject pitch = default;
+    [SerializeField] private GameObject roll = default;
 
-    private float minFlySpeed = 0f;
-    private float maxFlySpeed = 20f;
-    [SerializeField] private float flySpeed = 5f;
+    private float minFlySpeed = 2f;
+    private float maxFlySpeed = 10f;
+    [SerializeField] private float flySpeed = default;
 
     private CharacterController cc;
 
@@ -20,9 +21,9 @@ public class PlayerFreeController : MonoBehaviour
     private float leftShoulderRaw;
     private float rightShoulderRaw;
 
-    private float yawValue;
-    private float pitchValue;
-    private float rollValue;
+    private float yValue;
+    private float xValue;
+    private float zValue;    
 
     private void Awake()
     {
@@ -36,8 +37,9 @@ public class PlayerFreeController : MonoBehaviour
 
     void FixedUpdate()
     {
-        UpdateYawPitchRollValues();
-        UpdateYawPitchRoll();
+        //UpdateYawPitchRollRealistic();
+        UpdateYawPitchRollArcade();
+        UpdateSpeed();
         MovePlane();
     }
 
@@ -59,26 +61,38 @@ public class PlayerFreeController : MonoBehaviour
         rightShoulderRaw = Gamepad.current.rightShoulder.ReadValue();
     }
 
-    private void UpdateYawPitchRollValues()
+    private void UpdateYawPitchRollRealistic()
     {
-        yawValue = Mathf.MoveTowards(yawValue, -leftShoulderRaw + rightShoulderRaw, 10 * Mathf.Abs(yawValue - (-leftShoulderRaw + rightShoulderRaw)) * Time.deltaTime);
-        pitchValue = Mathf.MoveTowards(pitchValue, verticalRaw, 10 * Mathf.Abs(pitchValue - verticalRaw) * Time.deltaTime);
-        rollValue = Mathf.MoveTowards(rollValue, horizontalRaw, 15 * Mathf.Abs(rollValue - horizontalRaw) * Time.deltaTime);
+        yValue = Mathf.MoveTowards(yValue, -leftShoulderRaw + rightShoulderRaw, 10 * Mathf.Abs(yValue - (-leftShoulderRaw + rightShoulderRaw)) * Time.deltaTime);
+        xValue = Mathf.MoveTowards(xValue, verticalRaw, 10 * Mathf.Abs(xValue - verticalRaw) * Time.deltaTime);
+        zValue = Mathf.MoveTowards(zValue, horizontalRaw, 15 * Mathf.Abs(zValue - horizontalRaw) * Time.deltaTime);
+
+        roll.transform.Rotate(xValue * 2f, yValue * 1f, -zValue * 3f, Space.Self);
     }
 
-    private void UpdateYawPitchRoll()
+    private void UpdateYawPitchRollArcade()
     {
-        yaw.transform.Rotate(0, yawValue * 1f, 0, Space.Self);
-        pitchRoll.transform.Rotate(pitchValue * 2f, 0, 0, Space.Self);
-        pitchRoll.transform.Rotate(0, 0, -rollValue * 2f, Space.Self);
+        yValue = Mathf.MoveTowards(yValue, -leftShoulderRaw + rightShoulderRaw, 10 * Mathf.Abs(yValue - (-leftShoulderRaw + rightShoulderRaw)) * Time.deltaTime);
+        xValue = Mathf.MoveTowards(xValue, verticalRaw, 10 * Mathf.Abs(xValue - verticalRaw) * Time.deltaTime);
+
+        var maxTurn = horizontalRaw * 2;
+        zValue = Mathf.MoveTowards(zValue, maxTurn, 2 * Mathf.Abs(zValue - maxTurn) * Time.deltaTime);
+
+        yaw.transform.Rotate(0, zValue, 0, Space.Self);
+        pitch.transform.Rotate(xValue * 2f, 0, 0, Space.Self);
+        roll.transform.localRotation = Quaternion.Euler(0, 0, -zValue * 40);
+    }
+
+    private void UpdateSpeed()
+    {
+        flySpeed = Mathf.MoveTowards(flySpeed, maxFlySpeed, Time.deltaTime * rightTriggerRaw * 10);
+        flySpeed = Mathf.MoveTowards(flySpeed, minFlySpeed, Time.deltaTime * leftTriggerRaw * 10);
+        CameraMovement.Instance.UpdateRadius((flySpeed - minFlySpeed) / (maxFlySpeed - minFlySpeed));
     }
 
     private void MovePlane()
     {
-        flySpeed = Mathf.MoveTowards(flySpeed, maxFlySpeed, Time.deltaTime * rightTriggerRaw * 10);
-        flySpeed = Mathf.MoveTowards(flySpeed, minFlySpeed, Time.deltaTime * leftTriggerRaw * 10);
-
-        cc.Move(pitchRoll.transform.forward * flySpeed * Time.deltaTime);
+        cc.Move(pitch.transform.forward * flySpeed * Time.deltaTime);        
     }
 
     public void OnControllerColliderHit(ControllerColliderHit hit)

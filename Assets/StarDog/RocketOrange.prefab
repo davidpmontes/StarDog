@@ -157,3 +157,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifespan: 10
   impactEffect: 3
+  projectileVelocity: 3
