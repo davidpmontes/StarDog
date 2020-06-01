@@ -8,7 +8,7 @@ public class MiniMap : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject target;
 
-    private float minArc = 20;
+    private float minArc = 10;
     private float maxArc = 360;
 
     private float maxAlpha = 0.9f;

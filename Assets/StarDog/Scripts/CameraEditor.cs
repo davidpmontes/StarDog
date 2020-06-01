@@ -30,5 +30,15 @@ public class CameraEditor : Editor
         {
             myScript.TopView();
         }
+
+        if (GUILayout.Button("Cockpit"))
+        {
+            myScript.Cockpit();
+        }
+
+        if (GUILayout.Button("External"))
+        {
+            myScript.External();
+        }
     }
 }
