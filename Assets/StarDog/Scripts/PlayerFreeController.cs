@@ -8,7 +8,7 @@ public class PlayerFreeController : MonoBehaviour
     [SerializeField] private GameObject pitch = default;
     [SerializeField] private GameObject roll = default;
 
-    private float minFlySpeed = 2f;
+    private float minFlySpeed = 0f;
     private float maxFlySpeed = 10f;
     [SerializeField] private float flySpeed = default;
 

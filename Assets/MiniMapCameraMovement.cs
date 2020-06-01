@@ -18,6 +18,6 @@ public class MiniMapCameraMovement : MonoBehaviour
         transform.position = new Vector3(cameraPositionTarget.transform.position.x,
                                          altitude,
                                          cameraPositionTarget.transform.position.z);
-        transform.rotation = Quaternion.Euler(90, 0, cameraRotationTarget.transform.rotation.eulerAngles.y);
+        transform.rotation = Quaternion.Euler(90, 0, -cameraRotationTarget.transform.rotation.eulerAngles.y);
     }
 }
