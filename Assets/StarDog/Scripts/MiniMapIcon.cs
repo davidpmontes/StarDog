@@ -11,6 +11,11 @@ public class MiniMapIcon : MonoBehaviour
         icon.SetActive(true);
     }
 
+    private void OnDisable()
+    {
+        ObjectPool.Instance.DeactivateAndAddToPool(icon);
+    }
+
     private void FixedUpdate()
     {
         icon.transform.position = new Vector3(transform.position.x,

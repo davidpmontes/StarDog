@@ -27,17 +27,16 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out EnemyDamage enemyDamage))
-        {
-            enemyDamage.Damage();
-        }
+        var component = other.GetComponentInParent<EnemyDamage>();
+        if (component != null)
+            component.Damage();
 
         rb.velocity = Vector3.zero;
         rb.rotation = Quaternion.identity;
         StopAllCoroutines();
-        var sparks = ObjectPool.Instance.GetFromPoolInactive(impactEffect);
-        sparks.SetActive(true);
-        sparks.GetComponent<Sparks>().Initialize(transform.position, Quaternion.identity);
+        var impactEffect = ObjectPool.Instance.GetFromPoolInactive(this.impactEffect);
+        impactEffect.SetActive(true);
+        impactEffect.GetComponent<SpecialEffect>().Initialize(transform.position, Quaternion.identity);
         ObjectPool.Instance.DeactivateAndAddToPool(gameObject);
     }
 
