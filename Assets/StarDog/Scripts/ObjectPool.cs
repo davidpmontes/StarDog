@@ -9,7 +9,8 @@ public enum Pools
     SparksYellow,
     eff_bomb_small_01,
     MiniMapRedDot,
-    MiniMapGreenDiamond
+    MiniMapGreenDiamond,
+    Waypoint
 };
 
 public class ObjectPool : MonoBehaviour
