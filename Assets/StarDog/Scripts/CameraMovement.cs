@@ -37,6 +37,7 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveExternal()
     {
+        RearView();
         transform.position = externalTarget.transform.position;
 
         var targetRotation = externalTarget.transform.rotation;
