@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 4591219802359660643}
   - component: {fileID: 1819313950584771556}
   m_Layer: 9
-  m_Name: AlienBugMesh
+  m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

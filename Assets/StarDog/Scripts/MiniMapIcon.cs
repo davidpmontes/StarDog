@@ -11,6 +11,13 @@ public class MiniMapIcon : MonoBehaviour
         icon.SetActive(true);
     }
 
+    public void SetIconYellow()
+    {
+        ObjectPool.Instance.DeactivateAndAddToPool(icon);
+        icon = ObjectPool.Instance.GetFromPoolInactive(Pools.MiniMapYellowDot);
+        icon.SetActive(true);
+    }
+
     private void OnDisable()
     {
         ObjectPool.Instance.DeactivateAndAddToPool(icon);

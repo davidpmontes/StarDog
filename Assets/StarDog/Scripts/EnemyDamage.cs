@@ -27,6 +27,11 @@ public class EnemyDamage : MonoBehaviour
             explosion.SetActive(true);
             explosion.GetComponent<SpecialEffect>().Initialize(transform.GetChild(0).position);
             gameObject.SetActive(false);
+            EnemyManager.Instance.RemoveEnemy(gameObject);
+            var nearestEnemy = EnemyManager.Instance.GetNearestEnemyToPlayer();
+            if (nearestEnemy != null)
+                nearestEnemy.GetComponentInChildren<MiniMapIcon>().SetIconYellow();
+            MiniMap.Instance.SetNewTarget(nearestEnemy);
         }
     }
 

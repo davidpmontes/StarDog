@@ -14,16 +14,6 @@ public class SpiderCrawlEditor : Editor
         DrawDefaultInspector();
         EditorGUILayout.HelpBox("This is a help box", MessageType.Info);
 
-        BuildingCrawler myScript = (BuildingCrawler)target;
-
-        if (GUILayout.Button("Add Random Waypoint"))
-        {
-            myScript.AddRandomWaypoint();
-        }
-
-        if (GUILayout.Button("Stop Moving"))
-        {
-            myScript.StopMoving();
-        }
+        SpiderCrawl myScript = (SpiderCrawl)target;
     }
 }

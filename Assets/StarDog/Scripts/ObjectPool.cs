@@ -9,6 +9,7 @@ public enum Pools
     SparksYellow,
     eff_bomb_small_01,
     MiniMapRedDot,
+    MiniMapYellowDot,
     MiniMapGreenDiamond,
     Waypoint
 };

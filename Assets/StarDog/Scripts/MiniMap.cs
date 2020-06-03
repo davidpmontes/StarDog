@@ -32,6 +32,19 @@ public class MiniMap : MonoBehaviour
 
     void Update()
     {
+        DrawOrangeDirection();
+    }
+
+    public void SetNewTarget(GameObject newTarget)
+    {
+        target = newTarget;
+    }
+
+    private void DrawOrangeDirection()
+    {
+        if (target == null)
+            return;
+
         // vector from player to current enemy target
         Vector3 directionToTarget = new Vector3(target.transform.position.x, 0, target.transform.position.z) -
                                     new Vector3(player.transform.position.x, 0, player.transform.position.z);
