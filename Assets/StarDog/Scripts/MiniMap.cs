@@ -5,25 +5,17 @@ public class MiniMap : MonoBehaviour
     public static MiniMap Instance { get; private set; }
 
     [SerializeField] private Renderer r = default;
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject target;
+    [SerializeField] private GameObject player = default;
+    [SerializeField] private GameObject target = default;
 
-    private float minArc = 10;
-    private float maxArc = 360;
+    private readonly float minArc = 10;
+    private readonly float maxArc = 360;
 
-    private float maxAlpha = 0.9f;
-    private float minAlpha = 0.0f;
+    private readonly float maxAlpha = 0.8f;
+    private readonly float minAlpha = 0.0f;
 
-    private float minRadius = 5f;
-    private float maxRadius = 20f;
-
-    [SerializeField]
-    [Range(0, 360)]
-    private float manualAngle;
-
-    [SerializeField]
-    [Range(20, 360)]
-    private float arc;
+    private readonly float minRadius = 5f;
+    private readonly float maxRadius = 20f;
 
     private void Awake()
     {

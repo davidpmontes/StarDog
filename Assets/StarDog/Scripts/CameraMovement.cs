@@ -65,7 +65,7 @@ public class CameraMovement : MonoBehaviour
 
     public void RearView()
     {
-        Camera.main.transform.localPosition = new Vector3(0, 0, -0.3f);
+        Camera.main.transform.localPosition = new Vector3(0, 0.1f, -0.3f);
         Camera.main.transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 
