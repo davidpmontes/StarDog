@@ -3,7 +3,7 @@
   <settings>
     <lastVersion>12</lastVersion>
     <upToDate>true</upToDate>
-    <showSettingsWindow>true</showSettingsWindow>
+    <showSettingsWindow>false</showSettingsWindow>
     <enableFlashing>false</enableFlashing>
     <numFlashes>15</numFlashes>
     <flashColorRed>1</flashColorRed>
