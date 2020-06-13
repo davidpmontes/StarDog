@@ -22,6 +22,9 @@ public class MenuController : MonoBehaviour
 
     private void GetInput()
     {
+        if (Gamepad.current == null)
+            return;
+
         if (Gamepad.current.leftStick.x.ReadValue() < -0.5f)
         {
             if (!canMove)
